@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: laravel
+    container_name: templates
+    restart: unless-stopped
+    ports:
+      - "9020:9020"
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - utama
+    command: ["php", "artisan", "serve", "--host=0.0.0.0", "--port=9020", "--no-interaction"]
+
+
+networks:
+  utama:
+    external: true
+    name: utama
